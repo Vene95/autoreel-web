@@ -2,55 +2,20 @@
 #  Cloudflare Pages — _redirects pentru Flutter Web SPA
 # =============================================================================
 #
-#  Cum funcționează CF Pages:
-#    1. La fiecare request, CF Pages caută întâi un fișier static care
-#       matchează exact path-ul. Dacă există, îl servește direct.
-#    2. Dacă NU există, aplică regulile din _redirects în ordine.
+#  ATENȚIE — versiunea simplificată după bug:
 #
-#  Pentru un Flutter Web SPA cu `usePathUrlStrategy()`, vrem:
-#    - Fișierele build-uite (main.dart.js, /assets/*, /canvaskit/*) →
-#      servite ca atare (deja se întâmplă automat)
-#    - URL-urile dinamice (/car/:id, /dealer/:id, /saved, /settings etc.)
-#      care NU au fișier corespunzător → să primească index.html cu
-#      status 200, ca go_router-ul Flutter-ului să preia routarea client-side
+#  Versiunea anterioară avea reguli explicite per-extensie (`/*.js /:splat 200`)
+#  ca să silențiez warning-ul „infinite loop" al analizatorului CF Pages.
+#  REZULTATUL: CF Pages servea TOATE fișierele statice (flutter_bootstrap.js,
+#  manifest.json, main.dart.js, AssetManifest.bin) ca index.html în loc de
+#  conținutul real. Browser-ul refuza apoi să execute JS cu MIME=text/html.
 #
-#  De ce listăm explicit fișierele de mai jos, înainte de catch-all-ul `/*`:
-#    Cu doar `/*    /index.html   200`, analyzer-ul CF Pages dă warning de
-#    „potențial infinite loop" pentru că `/*` matchează inclusiv `/index.html`.
-#    În practică nu e loop (fișierele reale sunt servite oricum direct),
-#    dar warning-ul apare în logs la fiecare deploy.
+#  Aici păstrez DOAR catch-all-ul pentru SPA fallback. CF Pages servește
+#  fișierele reale (cele care există în build/web) la path-ul lor; doar URL-urile
+#  inexistente (ex. /car/:id, /dealer/:id, /saved) primesc index.html ca să
+#  preia go_router-ul Flutter-ului.
 #
-#    Listând explicit extensiile statice ca rewrite-uri identice
-#    (`/*.js  /:splat  200`), îi spunem analyzer-ului „astea NU se rescriu
-#    către altceva, lasă-le în pace" — și warning-ul dispare.
+#  Warning-ul de „infinite loop" e fals positive — îl ignorăm.
 # =============================================================================
 
-# --- Asset-uri statice servite as-is ---
-# Fără asta, /main.dart.js → /index.html (catch-all-ul de mai jos), care e
-# bug clasic Flutter Web pe CF Pages: app-ul nu se încarcă, devTools arată
-# „Unexpected token '<'" la parsing JS.
-/*.js          /:splat   200
-/*.wasm        /:splat   200
-/*.json        /:splat   200
-/*.png         /:splat   200
-/*.jpg         /:splat   200
-/*.jpeg        /:splat   200
-/*.svg         /:splat   200
-/*.ico         /:splat   200
-/*.webp        /:splat   200
-/*.woff        /:splat   200
-/*.woff2       /:splat   200
-/*.ttf         /:splat   200
-/*.otf         /:splat   200
-/*.html        /:splat   200
-
-# --- Directoare cu asset-uri (Flutter Web le creează la build) ---
-/assets/*      /assets/:splat       200
-/canvaskit/*   /canvaskit/:splat    200
-/icons/*       /icons/:splat        200
-
-# --- SPA catch-all ---
-# Pentru orice altceva (ex. /car/abc-123, /saved, /settings) servim
-# index.html cu status 200. Flutter cu go_router preia URL-ul de la
-# window.location și navighează client-side la ecranul corect.
-/*             /index.html          200
+/*  /index.html  200

@@ -1,0 +1,6 @@
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <g fill="#FFFFFF" transform="translate(28 0) skewX(-12)">
+    <path fill-rule="evenodd" d="M 54 183 L 92 73 L 130 183 Z M 86 155 L 98 155 L 108 183 L 76 183 Z"/>
+    <path fill-rule="evenodd" d="M 144 73 L 188 73 C 208 73 208 132 188 132 L 202 183 L 182 183 L 168 132 L 168 183 L 144 183 Z M 168 89 L 182 89 C 194 89 194 116 182 116 L 168 116 Z"/>
+  </g>
+</svg>
