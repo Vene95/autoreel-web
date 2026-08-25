@@ -1,0 +1,29 @@
+﻿# Fisiere binare â€” NU se modifica line endings la push/checkout.
+*.bin           binary
+*.smcbin        binary
+*.wasm          binary
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.gif           binary
+*.ico           binary
+*.webp          binary
+*.svg           binary
+*.ttf           binary
+*.otf           binary
+*.woff          binary
+*.woff2         binary
+*.eot           binary
+*.pdf           binary
+*.mp4           binary
+*.webm          binary
+
+# Source maps si JS â€” pastram LF (Unix line endings), niciodata CRLF.
+*.js            text eol=lf
+*.json          text eol=lf
+*.map           text eol=lf
+*.html          text eol=lf
+*.css           text eol=lf
+
+# Catch-all: orice altceva = text cu LF.
+*               text eol=lf

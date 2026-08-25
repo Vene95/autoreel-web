@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "35M26D67AZ.com.autoreel.autoreel",
+        "paths": ["/car/*", "/dealer/*", "/saved", "/profile/*"]
+      }
+    ]
+  }
+}

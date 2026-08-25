@@ -1,0 +1,27 @@
+# =============================================================================
+#  Cloudflare Pages — _redirects pentru Flutter Web SPA
+# =============================================================================
+#
+#  ATENȚIE — versiunea simplificată după bug:
+#
+#  Versiunea anterioară avea reguli explicite per-extensie (`/*.js /:splat 200`)
+#  ca să silențiez warning-ul „infinite loop" al analizatorului CF Pages.
+#  REZULTATUL: CF Pages servea TOATE fișierele statice (flutter_bootstrap.js,
+#  manifest.json, main.dart.js, AssetManifest.bin) ca index.html în loc de
+#  conținutul real. Browser-ul refuza apoi să execute JS cu MIME=text/html.
+#
+#  Aici păstrez DOAR catch-all-ul pentru SPA fallback. CF Pages servește
+#  fișierele reale (cele care există în build/web) la path-ul lor; doar URL-urile
+#  inexistente (ex. /car/:id, /dealer/:id, /saved) primesc index.html ca să
+#  preia go_router-ul Flutter-ului.
+#
+#  Warning-ul de „infinite loop" e fals positive — îl ignorăm.
+# =============================================================================
+
+# Universal Links (iOS): CF Pages tratează path-urile FĂRĂ extensie ca rute SPA
+# și le servește index.html. AASA-ul Apple n-are extensie, deci primea HTML.
+# Rewrite intern (200) către un fișier cu extensie .json — URL-ul rămâne identic,
+# dar conținutul servit e JSON-ul corect. TREBUIE să fie ÎNAINTE de catch-all.
+/.well-known/apple-app-site-association  /aasa.json  200
+
+/*  /index.html  200

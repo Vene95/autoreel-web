@@ -1,0 +1,7 @@
+# Cloudflare Pages — headers
+# Servim AASA-ul cu content-type application/json (Apple îl preferă; extensia
+# lipsește, altfel CF l-ar servi ca octet-stream). Fără asta, Universal Links
+# pot eșua pe unele versiuni iOS.
+/.well-known/apple-app-site-association
+  Content-Type: application/json
+  Cache-Control: public, max-age=3600
