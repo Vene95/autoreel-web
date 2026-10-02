@@ -6,8 +6,12 @@
 |---|---|
 | `logo.svg` | Logo complet (gradient portocaliu + AR alb). Folosit în-app prin widget-ul `AutoReelLogo`. |
 | `logo_monochrome.svg` | Doar literele AR cu `currentColor`. Util pentru iconițe inline, dark/light mode adaptive. |
-| `logo_icon.png` *(de generat)* | Versiune PNG 1024×1024 pentru launcher icons. |
-| `logo_foreground.png` *(de generat)* | Adaptive icon foreground Android — literele AR transparent, fără gradient. |
+| `logo_icon.png` | PNG 1024×1024: pătrat alb rotunjit cu colțuri transparente, AR portocaliu. **Nu se mai folosește pentru launcher** (colțurile transparente ies ca fâșii pe iOS). |
+| `logo_foreground.png` | AR alb pe transparent (vechiul adaptive foreground, pe fundal portocaliu). Păstrat ca sursă de formă. |
+| `logo_icon_white.png` | **Launcher iOS / Android vechi / web / Windows.** 1024×1024, alb plin până la margini, AR portocaliu. Construit din `logo_icon.png`: zona literelor copiată, restul alb. |
+| `logo_foreground_orange.png` | **Adaptive foreground Android 8+**, pe fundal `#FFFFFF`. Forma din `logo_foreground.png`, culoarea din `logo_icon.png` (marginile „dez-amestecate” de alb, fără halou). |
+
+Iconița e aceeași pe toate platformele din oct 2026: **albă, AR portocaliu**.
 
 ## Cum generezi launcher icons (Android + iOS + Web + Windows)
 
