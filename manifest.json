@@ -4,7 +4,7 @@
     "start_url": "/",
     "scope": "/",
     "display": "standalone",
-    "background_color": "#FFFFFF",
+    "background_color": "#0E0E14",
     "theme_color": "#FF6A00",
     "description": "AutoReel — Marketplace photos-first pentru mașini second-hand în România.",
     "orientation": "portrait-primary",
