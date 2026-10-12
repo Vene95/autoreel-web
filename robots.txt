@@ -1,0 +1,18 @@
+# Pagini publice: feed, anunțuri (/car/<id>), parcuri (/dealer/<id>),
+# parteneri, căutare. Restul sunt ecrane personale sau de administrare.
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /upload
+Disallow: /profile
+Disallow: /settings
+Disallow: /login
+Disallow: /reset-password
+Disallow: /sterge-cont
+Disallow: /notificari
+Disallow: /saved
+Disallow: /follows
+Disallow: /followers
+Disallow: /car/*/edit
+
+Sitemap: https://app.autoreel.ro/sitemap.xml

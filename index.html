@@ -23,7 +23,12 @@
   <!-- Fără <link rel="canonical"> și fără og:url: același index.html se
        servește pentru TOATE rutele (/car/…, /dealer/…), deci un canonical
        fix spunea Google-ului că fiecare anunț e o copie a paginii
-       principale. Fără ele, fiecare URL rămâne al lui. -->
+       principale. Fără ele, fiecare URL rămâne al lui.
+       Pentru /car/<id> și /dealer/<id>, `functions/_middleware.js`
+       (Cloudflare Pages Function) rescrie titlul, descrierea, Open Graph
+       și Twitter de mai jos cu datele anunțului și adaugă canonical, og:url
+       și JSON-LD. Dacă schimbi etichetele de aici, verifică și selectorii
+       de acolo. -->
 
   <!--
     Smart App Banner (iOS/Safari).
